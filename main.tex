@@ -1,0 +1,105 @@
+\documentclass[12 pt]{article}
+\usepackage[margin=1 in]{geometry}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage[spanish]{babel}
+\usepackage[pdftex]{hyperref}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor = black,
+    filecolor=magenta,      
+    urlcolor= blue,
+}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{dirtytalk}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}   \usepackage{dirtytalk} 
+\usepackage{float}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\restylefloat{table}
+\newtheorem{thm}{Teorema}
+\newtheorem{lema}{Lema}
+
+
+\lstset{ 
+  language=Python,                     
+  basicstyle=\scriptsize\ttfamily, 
+  numberstyle=\tiny\color{Blue},  
+  numbers=left,
+  stepnumber=1,                  
+  backgroundcolor=\color{white},  
+  showspaces=false,               
+  showstringspaces=false,         
+  showtabs=false,                 
+  frame=single,                   
+  rulecolor=\color{black},        
+  tabsize=3,             
+  captionpos=b,                   
+  breaklines=true,                
+  breakatwhitespace=false,        
+  keywordstyle=\color{RoyalBlue},      
+  commentstyle=\color{YellowGreen},   
+  stringstyle=\color{ForestGreen}     
+} 
+
+
+
+
+\title{Proyecto Final}
+\author{Alam Rojas\\
+Cristian José Alvarez Bran \\
+Fernando\\
+Ricardo 
+}
+\date{}
+
+
+
+\begin{document}
+\maketitle
+
+
+
+\section{Inciso i}
+Procedemos a calcular $p(m,\theta)$: 
+\begin{align*}
+    p(m, \theta) &= \int_{0}^{\infty}p(m, \theta , \lambda)d\lambda\\
+    &= \int_{0}^{\infty}p(m|\theta, \lambda)p(\theta, \lambda) d\lambda\\
+    &= \int_{0}^{\infty}e^{-\frac{\lambda}{\theta}}\frac{\lambda^{m-1}}{m!\theta^m} d\lambda\\
+    &=\frac{\theta^m\Gamma(m)}{m!\theta^m}\\
+    &= \frac{1}{m-1}.
+\end{align*}
+
+\section{Inciso ii}
+
+\begin{lema}
+La serie 
+\begin{equation*}
+    \sum_{m=1}^{\infty}\frac{\theta^S(1-\theta)^{nm-S}}{m}\prod_{i=1}^{n}{{m}\choose{x_i}}
+\end{equation*}
+converge.
+\end{lema}
+\begin{proof}
+Examinaremos el cociente entre términos consecutivos de la serie:
+\begin{align*}
+    \frac{a_{m+1}}{a_m} &=  
+    \frac{\frac{(1-\theta)^{n(m+1)}}{m+1}\prod_{i=1}^{n}{{m+1}\choose{x_i}}}{ \frac{(1-\theta)^{nm}}{m}\prod_{i=1}^{n}{{m}\choose{x_i}}}\\
+    &= \frac{(1-\theta)^{n}m\prod_{i=1}^{n}{{m+1}\choose{x_i}}}{(m+1)\prod_{i=1}^{n}{{m}\choose{x_i}}}.
+\end{align*}
+Luego notemos que 
+\begin{equation*}
+    {{m+1}\choose{x_i}} = \frac{(m+1)!}{x_i!(m-x_i+1)!} =  \frac{m+1}{m-x_i+1}\cdot\frac{m!}{x_i!(m-x_i)!} = \frac{m+1}{m-x_i+1}{{m}\choose{x_i}}.
+\end{equation*}
+Sustituyendo en la expresión anterior llegamos a que 
+\begin{equation}
+    \frac{a_{m+1}}{a_m} = (1-\theta)^n\frac{m}{m+1}\prod_{i=1}^{n} \frac{m+1}{m-x_i+1}.
+\end{equation}
+De modo que $\lim_{m\to \infty} \frac{a_{m+1}}{a_m} = (1-\theta)^n < 1$ y por el criterio de la razón, la serie converge.
+\end{proof}
+\end{document}
